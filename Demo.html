@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>倒计时</title> 	
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;			
+		}
+		#count{
+			width: 800px;
+			height: 200px;
+			background: #f10180;
+			margin: 100px auto;
+			text-align: center;
+			line-height: 200px;
+			font-size: 24px;
+		}
+		#count span{
+			width: 60px;
+			height: 60px;
+			background: rgba(255,255,255,0.25);
+			line-height: 60px;
+			display: inline-block;
+			vertical-align: middle;
+			box-shadow: 0 0 5px rgba(255,255,255,0.3);
+			border-radius: 5px;
+		}
+
+	</style>
+</head>
+	<div id="count">
+		距离秒杀时间还有：
+		<span class="day">00</span> 
+		天
+		<span class="hour">00</span>
+		小时
+		<span class="min">00</span>
+		分钟
+		<span class="sec">00</span>
+		秒
+	</div>
+	<script type="text/javascript">
+		var oCount = document.getElementById("count");
+		var spans = oCount.getElementsByTagName("span");
+
+		var endTime = new Date("2020/04/24 00:00:00"); // 未来时间；
+		var timer = null;
+
+		clearInterval(timer);
+		timer = setInterval(countTime,1000);
+		
+
+		function countTime(){
+
+			var nowTime = new Date(); // 现在时间；
+			var lastTime = parseInt((endTime - nowTime)/1000);
+
+			if(lastTime>=0){
+				var day = parseInt(lastTime/60/60/24);
+				var hour = parseInt(lastTime/60/60%24);
+				var min = parseInt(lastTime/60%60);
+				var sec = parseInt(lastTime%60);
+
+
+				spans[0].innerHTML = day;
+				spans[1].innerHTML = hour;
+				spans[2].innerHTML = min;
+				spans[3].innerHTML = sec;
+			}else{
+				clearInterval(timer);
+			}
+			
+		}
+
+
+	</script>
+<body>
+
+</body>
+</html>
